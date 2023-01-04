@@ -12,11 +12,23 @@ passport.use(
 
     async (userName, password, done) => {
       const user = await User.findOne({ userName });
+      console.log(user);
+      //@ts-ignore
+      if (!user) {
+        console.log('user not found');
+        return;
+      }
+
+      if (user.password === password) {
+        done(null, user);
+      } else {
+        done(null, false);
+      }
 
       //@ts-ignore
 
-      if (user && (await user.comparePassword(password))) done(null, user);
-      else done(null, false);
+      // if (user && (await user.comparePassword(password))) done(null, user);
+      // else done(null, false);
     }
   )
 );

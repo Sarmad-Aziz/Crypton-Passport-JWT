@@ -9,13 +9,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(sessionMiddleware);
+// app.use(sessionMiddleware);
+// app.use(passport.session());
+
 app.use(passport.initialize());
-app.use(passport.session());
 app.use(bodyParser.json());
 app.use(userRoutes);
 
-app.get('/', (req: Request, res: any, next: any) => {
+app.get('/abc', (req: Request, res: any, next: any) => {
   res.send('Typescript working');
 });
 console.log('Running on 8080 ');
